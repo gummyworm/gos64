@@ -1,0 +1,1 @@
+constant DEFAULT_BG_COLOR(100)
