@@ -1,6 +1,7 @@
 scope Draw {
 // draw a rect colored t4 @ (t0,t1). the width/height are given in (t2,t3)
 Rect:
+scope Rect {
 constant dst(a0)
 constant rowstart(t6)
 constant rowstop(t5)
@@ -38,6 +39,7 @@ l1:
 	addi sp,sp,4
 	jr ra
 	nop
+}
 
 // Text renders the text in (a0) to (t0,t1)
 Text:
@@ -71,6 +73,4 @@ done:
 	jr ra
 	nop
 }
-
 }
-

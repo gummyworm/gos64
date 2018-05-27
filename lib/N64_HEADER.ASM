@@ -21,7 +21,7 @@
   dd 0 // UNUSED
 
 // PROGRAM TITLE (27 Byte ASCII String, Use Spaces For Unused Bytes)
-  db "CPU INPUT TEST 32BPP       "
+  db "GOS 0.0.1                  "
 //   "123456789012345678901234567"
 
 // DEVELOPER ID CODE 

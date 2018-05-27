@@ -25,11 +25,13 @@ Start:
 	ScreenNTSC(Screen.w, Screen.h, BPP32, Screen.addr) // Screen NTSC: 320x240, 32BPP, DRAM Origin $A0100000
 	lui a0,$A010
 	la a1,$A0100000+(320*240*4)-4
-	li t0,$000000FF
+	li t0,$aaaaaaFF
+	li t1,$ffffffff
 ClearScreen:
+	xor t0,t0,t1
 	sw t0,0(a0)
 	bne a0,a1,ClearScreen
-	addi a0,4
+	addi a0,Screen.bpp
 	InitController(PIF1) // Initialize Controller
 
 Loop:
@@ -43,8 +45,7 @@ Loop:
 
 include "bob.asm"
 include "draw.asm"
-include "input.asm"
+include "device.asm"
 include "win.asm"
 include "mem.asm"
-
 include "test.asm"
