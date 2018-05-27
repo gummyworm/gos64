@@ -26,7 +26,27 @@ macro InitController(PIF) {
   sw a1,SI_PIF_ADDR_WR64B(a0) // 64 Byte Write DRAM -> PIF ($A4800010)
 }
 
+macro InitKeyboard(PIF) {
+  lui a0,SI_BASE // A0 = SI Base Register ($A4800000)
+  la a1,{PIF} // A1 = PIF1 Offset
+  sw a1,SI_DRAM_ADDR(a0) // Store PIF1 To SI_DRAM_ADDR ($A4800000)
+  la a1,(PIF_BASE<<16)|PIF_RAM // A1 = PIF_RAM: JoyChannel ($BFC007C0)
+  sw a1,SI_PIF_ADDR_WR64B(a0) // 64 Byte Write DRAM -> PIF ($A4800010)
+}
+
 macro ReadController(PIF) {
+  lui a0,PIF_BASE // A0 = PIF Base Register ($BFC00000)
+  lui a1,SI_BASE // A1 = SI Base Register ($A4800000)
+  la a2,{PIF} // A2 = PIF2 Offset
+  sw a2,SI_DRAM_ADDR(a1) // Store PIF2 To SI_DRAM_ADDR ($A4800000)
+  ori a2,a0,PIF_RAM // A2 = PIF_RAM: JoyChannel ($BFC007C0)
+  sw a2,SI_PIF_ADDR_RD64B(a1) // 64 Byte Read PIF -> DRAM ($A4800004)
+  lhu t0,PIF_HWORD(a0) // T0 = Buttons ($BFC007C4)
+  lb t1,PIF_XBYTE(a0) // T1 = Analog X ($BFC007C6)
+  lb t2,PIF_YBYTE(a0) // T2 = Analog Y ($BFC007C7)
+}
+
+macro ReadKeyboard(PIF) {
   lui a0,PIF_BASE // A0 = PIF Base Register ($BFC00000)
   lui a1,SI_BASE // A1 = SI Base Register ($A4800000)
   la a2,{PIF} // A2 = PIF2 Offset

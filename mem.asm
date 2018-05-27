@@ -2,6 +2,7 @@ scope Mem {
 
 // Allocate t0 blocks of memory and return an address to them in a0
 Alloc:
+scope Alloc {
 	la a0,blocks
 	
 	// find next available contiguous chunk of t0 blocks
@@ -36,9 +37,11 @@ l1:
 
 	jr ra
 	nop
+}
 
 // Free the memory at address in a0
 Free:
+scope Free {
 	la a1,ptrs
 l0:
 	lw t0,0(a1)
@@ -69,10 +72,11 @@ l1:
 done:
 	jr ra
 	nop
+}
 
 ///////////////////////////////////////
 // locations of each allocated block
-ptrs
+ptrs:
 fill 1024*4
 
 // the size of each allocation
