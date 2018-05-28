@@ -34,18 +34,15 @@ Right:
 	addi t2,t2,1
 
 Render:
-	sw t2,0(a0)
-	sw t3,0(a1)
 	move t0,t2
 	move t1,t3
-	li t2,8
-	li t3,8
-	la a1,testsprite
-	jal Bob.Blit
+	jal Sys.Cursor.Move
 	nop
 
 	la a0,testwin
 	jal Win.Draw
+	nop
+	jal Draw.Cursor
 	nop
 
 	lw ra,0(sp)
@@ -53,3 +50,12 @@ Render:
 	jr ra
 	nop
 
+///////////////////////////////////////
+align(4)
+testtext: 
+db "hello world",0
+
+///////////////////////////////////////
+align(8)
+testsprite:
+insert "cur.bin"

@@ -73,4 +73,19 @@ done:
 	jr ra
 	nop
 }
+
+// Cursor renders the mouse cursor
+Cursor:
+scope Cursor {
+	la a0,Sys.Cursor.Dat
+	lw t0,Sys.Cursor.X(a0)
+	lw t1,Sys.Cursor.Y(a0)
+	li t2,32
+	li t3,32
+	add a1,a0,Sys.Cursor.Gfx
+	jal Bob.Blit
+	nop
+	jr ra
+	nop
+}
 }

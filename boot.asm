@@ -23,6 +23,10 @@ insert "lib/N64_BOOTCODE.BIN" // Include 4032 Byte Boot Code
 Start:
 	N64_INIT() // Run N64 Initialisation Routine
 	ScreenNTSC(Screen.w, Screen.h, BPP32, Screen.addr) // Screen NTSC: 320x240, 32BPP, DRAM Origin $A0100000
+	InitController(PIF1) // Initialize Controller
+
+Loop:
+	WaitScanline($1E0) // Wait For Scanline To Reach Vertical Blank
 	lui a0,$A010
 	la a1,$A0100000+(320*240*4)-4
 	li t0,$aaaaaaFF
@@ -32,10 +36,7 @@ ClearScreen:
 	sw t0,0(a0)
 	bne a0,a1,ClearScreen
 	addi a0,Screen.bpp
-	InitController(PIF1) // Initialize Controller
 
-Loop:
-	WaitScanline($1E0) // Wait For Scanline To Reach Vertical Blank
 	jal Dev.PollInput
 	nop
 	jal Test
@@ -49,3 +50,4 @@ include "device.asm"
 include "win.asm"
 include "mem.asm"
 include "test.asm"
+include "sys.asm"

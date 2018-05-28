@@ -30,12 +30,15 @@ constant h(t3)
 	la rowstart,Screen.addr
 	add rowstart,rowstart,t5
 	add rowstop,rowstart,w
+	li t6,Props.COLORKEY
 l0:
 	move dst,rowstart
 l1:	
 	lw t2,0(src)
+	beq t2,t6,skip
 	addi src,src,Screen.bpp
 	sw t2,0(dst)
+skip:
 	addi dst,dst,Screen.bpp
 	bne dst,rowstop,l1
 	nop
@@ -51,22 +54,6 @@ l1:
 	nop
 }
 }
-
-///////////////////////////////////////
-align(8)
-testsprite:
-dw $ffffffff,$ffffffff,$fffffff,$ffffffff
-dw $ffffffff,$ffffffff,$fffffff,$ffffffff
-dw $ffffffff,$ffffffff,$fffffff,$ffffffff
-dw $ffffffff,$ffffffff,$fffffff,$ffffffff
-dw $ffffffff,$ffffffff,$fffffff,$ffffffff
-dw $ffffffff,$ffffffff,$fffffff,$ffffffff
-dw $ffffffff,$ffffffff,$fffffff,$ffffffff
-dw $ffffffff,$ffffffff,$fffffff,$ffffffff
-dw $ffffffff,$ffffffff,$fffffff,$ffffffff
-align(4)
-testtext: 
-db "hello world",0
 
 ///////////////////////////////////////
 align(4)
