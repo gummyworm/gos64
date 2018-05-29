@@ -25,6 +25,11 @@ Start:
 	ScreenNTSC(Screen.w, Screen.h, BPP32, Screen.addr) // Screen NTSC: 320x240, 32BPP, DRAM Origin $A0100000
 	InitController(PIF1) // Initialize Controller
 
+	jal Sys.Init
+	nop
+	jal Vars.Init
+	nop
+
 Loop:
 	WaitScanline($1E0) // Wait For Scanline To Reach Vertical Blank
 	lui a0,$A010
@@ -44,6 +49,7 @@ ClearScreen:
 	j Loop
 	nop
 
+include "sysvars.asm"
 include "bob.asm"
 include "draw.asm"
 include "device.asm"

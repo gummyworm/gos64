@@ -24,7 +24,7 @@ constant h(t3)
 	add rowstop,rowstart,w
 l0:
 	move dst,rowstart
-l1:	
+l1:
 	sw t4,0(dst)
 	addi dst,dst,Screen.bpp
 	bne dst,rowstop,l1
@@ -54,7 +54,7 @@ constant src(a2)
 	move src,a0
 	move x,t0
 	move y,t1
-l0:	
+l0:
 	lb ch,0(src)
 	beq ch,r0,done
 	addi src,src,1
@@ -77,12 +77,12 @@ done:
 // Cursor renders the mouse cursor
 Cursor:
 scope Cursor {
-	la a0,Sys.Cursor.Dat
-	lw t0,Sys.Cursor.X(a0)
-	lw t1,Sys.Cursor.Y(a0)
+	la a0,Vars.Cursor
+	lw t0,Vars.Cursor.X(a0)
+	lw t1,Vars.Cursor.Y(a0)
+	lw a1,Vars.Cursor.Gfx(a0)
 	li t2,32
 	li t3,32
-	add a1,a0,Sys.Cursor.Gfx
 	jal Bob.Blit
 	nop
 	jr ra

@@ -7,7 +7,7 @@ PollInput:
 	ReadController(PIF2) // T0 = Controller Buttons, T1 = Analog X, T2 = Analog Y
 	la a0,Buttons
 	sw t0,0(a0)
-	
+
 	lw ra,0(sp)
 	addi sp,sp,4
 	jr ra

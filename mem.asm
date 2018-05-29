@@ -4,7 +4,7 @@ scope Mem {
 Alloc:
 scope Alloc {
 	la a0,blocks
-	
+
 	// find next available contiguous chunk of t0 blocks
 l0:
 	move t1,t0
@@ -30,7 +30,7 @@ l1:
 	la a1,blocks
 	sll t2,t1,2
 	add a1,a1,t2
-	
+
 	la a0,pool
 	add a0,a0,t2
 	sw a0,0(a1)
@@ -63,7 +63,7 @@ l0:
 	add a0,a0,t0
 	add a1,a0,t1
 
-l1:	
+l1:
 	//mark the blocks as empty
 	sw r0,0(a0)
 	bne a0,a1,l1
