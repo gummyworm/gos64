@@ -71,6 +71,7 @@ Get:
 // move the cursor by (t0,t1) pixels
 Move:
 	la a0,Vars.Cursor
+
 	lw t2,Vars.Cursor.X(a0)
 	add t2,t2,t0
 	sw t2,Vars.Cursor.X(a0)
@@ -90,8 +91,11 @@ scope Update {
 	la a0,Vars.Dev
 	lw t0,Vars.Dev.BUTTONS(a0)
 
-	move t2,r0
-	move t3,r0
+
+	lw t2,Vars.Cursor.XAccel(a0)
+	lw t3,Vars.Cursor.YAccel(a0)
+	move t5,t2
+	move t6,t3
 
 	andi t4,t0,JOY_UP // Test JOY UP
 	beqz t4,down
@@ -117,6 +121,17 @@ right:
 	addi t2,t2,1
 
 done:
+	bne t5,t2,accelX
+	nop
+	move t2,r0
+accelX:
+	sw t2,Vars.Cursor.XAccel(a0)
+	bne t6,t3,accelY
+	nop
+	move t3,r0
+accelY:
+	sw t3,Vars.Cursor.YAccel(a0)
+
 	move t0,t2
 	move t1,t3
 	jal Move
