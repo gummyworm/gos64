@@ -77,6 +77,9 @@ done:
 // Cursor renders the mouse cursor
 Cursor:
 scope Cursor {
+	addi sp,sp,-4
+	sw ra,0(sp)
+
 	la a0,Vars.Cursor
 	lw t0,Vars.Cursor.X(a0)
 	lw t1,Vars.Cursor.Y(a0)
@@ -85,6 +88,9 @@ scope Cursor {
 	li t3,32
 	jal Bob.Blit
 	nop
+
+	lw ra,0(sp)
+	addi sp,sp,4
 	jr ra
 	nop
 }

@@ -17,6 +17,13 @@ Set:
 	jr ra
 	nop
 
+Get:
+	la a0,Vars.Cursor
+	lw t0,Vars.Cursor.X(a0)
+	lw t1,Vars.Cursor.X(a0)
+	jr ra
+	nop
+
 // move the cursor by (t0,t1) pixels
 Move:
 	la a0,Vars.Cursor

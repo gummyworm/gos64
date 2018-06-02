@@ -2,13 +2,11 @@ Test:
 	addi sp,sp,-4
 	sw ra,0(sp)
 
-	la a0,BobTab.x
-	lw t2,0(a0)
-	la a1,BobTab.y
-	lw t3,0(a1)
+	la a0,Vars.Dev
+	lw t0,Vars.Dev.BUTTONS(a0)
 
-	la a0,Dev.Buttons
-	lw t0,0(a0)
+	move t2,r0
+	move t3,r0
 
 	andi t4,t0,JOY_UP // Test JOY UP
 	beqz t4,Down
@@ -52,7 +50,7 @@ Render:
 
 ///////////////////////////////////////
 align(4)
-testtext: 
+testtext:
 db "hello world",0
 
 ///////////////////////////////////////
