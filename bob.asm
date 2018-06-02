@@ -33,7 +33,7 @@ constant h(t3)
 	li t6,Props.COLORKEY
 l0:
 	move dst,rowstart
-l1:	
+l1:
 	lw t2,0(src)
 	beq t2,t6,skip
 	addi src,src,Screen.bpp

@@ -27,9 +27,11 @@ Cursor:
 scope Cursor {
 constant X(0)
 constant Y(4)
-constant Gfx(8)
+constant Accel(8)
+constant Gfx(12)
 	dw 10	// X
 	dw 20	// Y
+	dw 1    // Accel
 	dw cursorsprite // Gfx
 }
 Dev:

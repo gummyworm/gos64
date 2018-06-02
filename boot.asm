@@ -32,22 +32,17 @@ Start:
 
 Loop:
 	WaitScanline($1E0) // Wait For Scanline To Reach Vertical Blank
-	lui a0,$A010
-	la a1,$A0100000+(320*240*4)-4
-	li t0,$aaaaaaFF
-	li t1,$ffffffff
-ClearScreen:
-	xor t0,t0,t1
-	sw t0,0(a0)
-	bne a0,a1,ClearScreen
-	addi a0,Screen.bpp
 
-	jal Dev.PollInput
+	jal Sys.Update
 	nop
-	jal Test
+	jal Sys.Redraw
 	nop
+
 	j Loop
 	nop
+
+wallpaper:
+insert "wallpaper.bin"
 
 include "sysvars.asm"
 include "bob.asm"
