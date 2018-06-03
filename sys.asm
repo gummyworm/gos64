@@ -32,14 +32,14 @@ scope Redraw {
 	addi sp,sp,-4
 	sw ra,0(sp)
 
-	// draw the wallpaper
-	move t0,r0
-	move t1,r0
-	li t2,320
-	li t3,240
-	la a1,wallpaper
-	jal Bob.Blit
-	nop
+
+	// TODO: read the pixel at the cursor position
+	// TODO: draw icons with "magic" colors
+
+	// TODO: draw windows
+
+	// TODO: compare pixel at cursor position with "magic" color (if ==,
+	// the cursor is over an icon
 
 	jal Draw.Cursor
 	nop

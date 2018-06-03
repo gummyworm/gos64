@@ -35,14 +35,13 @@ Loop:
 
 	jal Sys.Update
 	nop
+	jal Desk.Draw
+	nop
 	jal Sys.Redraw
 	nop
 
 	j Loop
 	nop
-
-wallpaper:
-insert "wallpaper.bin"
 
 include "sysvars.asm"
 include "bob.asm"
@@ -52,3 +51,4 @@ include "win.asm"
 include "mem.asm"
 include "test.asm"
 include "sys.asm"
+include "desk.asm"

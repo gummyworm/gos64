@@ -41,6 +41,13 @@ scope Dev {
 constant BUTTONS(0)
 	dw 0
 }
+
+Shell:
+scope Shell {
+constant Windows(0)
+constant MAX_WINDOWS(16)
+	fill 4*MAX_WINDOWS
+}
 pullvar base
 initend:
 

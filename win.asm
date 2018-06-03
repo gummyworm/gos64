@@ -16,17 +16,44 @@
 //text:   byte[]
 
 scope Win {
+constant X(0)
+constant Y(4)
+constant W(8)
+constant H(12)
+constant Color(16)
+constant Children(20)
+
 // return address to a new window in a0
-// position in (t0,t1), size in (t2,t3), address to text in t4
 New:
-	sw t0,0(a0)
-	sw t1,4(a0)
-	sw t2,8(a0)
-	sw t3,12(a0)
-	li t0,Props.DEFAULT_BG_COLOR
-	sw t0,16(a0)
+scope New {
+	li t0,1
+	jal Mem.Alloc
+	nop
+
+	la a1,Vars.Shell
+l0:
+	lw t0,Vars.Shell.Windows(a1)
+	bne t0,r0,l0
+	addi a1,4
+	sw a0,0(a1)
+
 	jr ra
 	nop
+}
+
+// initialize the window in (a0) according to the provided parameters
+// position in (t0,t1), size in (t2,t3), address to text in t4
+Init:
+scope Init {
+	sw t0,X(a0)
+	sw t1,Y(a0)
+	sw t2,W(a0)
+	sw t3,H(a0)
+	li t0,Props.DEFAULT_BG_COLOR
+	sw t0,Color(a0)
+	jr ra
+	nop
+}
 
 // draw the window in (a0)
 Draw:
