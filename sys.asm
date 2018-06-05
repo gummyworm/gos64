@@ -17,33 +17,6 @@ scope Update {
 	jal Dev.PollInput
 	nop
 
-	jal Cursor.Update
-	nop
-
-	lw ra,0(sp)
-	addi sp,sp,4
-	jr ra
-	nop
-}
-
-///////////////////////////////////////
-Redraw:
-scope Redraw {
-	addi sp,sp,-4
-	sw ra,0(sp)
-
-
-	// TODO: read the pixel at the cursor position
-	// TODO: draw icons with "magic" colors
-
-	// TODO: draw windows
-
-	// TODO: compare pixel at cursor position with "magic" color (if ==,
-	// the cursor is over an icon
-
-	jal Draw.Cursor
-	nop
-
 	lw ra,0(sp)
 	addi sp,sp,4
 	jr ra
@@ -90,7 +63,6 @@ scope Update {
 
 	la a0,Vars.Dev
 	lw t0,Vars.Dev.BUTTONS(a0)
-
 
 	lw t2,Vars.Cursor.XAccel(a0)
 	lw t3,Vars.Cursor.YAccel(a0)

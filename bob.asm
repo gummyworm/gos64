@@ -8,11 +8,28 @@ fill 64*4
 scope Bob {
 // Blit renders the BOB in a1 at (t0,t1) the dimensions are given in (t2,t3)
 Blit:
+	addi sp,sp,-4
+	sw ra,0(sp)
+
+	move t7,0
+	jal BlitAsColor
+	nop
+
+	lw ra,0(sp)
+	addi sp,sp,4
+	jr ra
+	nop
+
+// Blit renders only the non-colorkeyed pixels of the BOB in a1
+// at (t0,t1) the dimensions are given in (t2,t3). The color rendered is given
+// in t4
+BlitAsColor:
 scope Blit {
 constant src(a1)
 constant dst(a0)
 constant rowstart(t4)
 constant rowstop(t5)
+constant drawcolor(t7)
 constant x(t0)
 constant y(t1)
 constant w(t2)
@@ -37,6 +54,11 @@ l1:
 	lw t2,0(src)
 	beq t2,t6,skip
 	addi src,src,Screen.bpp
+	beqz t7,putpixel
+	nop
+	move t2,drawcolor
+
+putpixel:
 	sw t2,0(dst)
 skip:
 	addi dst,dst,Screen.bpp

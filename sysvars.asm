@@ -45,7 +45,10 @@ constant BUTTONS(0)
 Shell:
 scope Shell {
 constant Windows(0)
+constant Icons(MAX_WINDOWS*4)
+constant MAX_ICONS(16)
 constant MAX_WINDOWS(16)
+	fill 4*MAX_ICONS
 	fill 4*MAX_WINDOWS
 }
 pullvar base

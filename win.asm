@@ -26,6 +26,11 @@ constant Children(20)
 // return address to a new window in a0
 New:
 scope New {
+	addi sp,sp,-4
+	sw ra,0(sp)
+	addi sp,sp,-4
+	sw a0,0(sp)
+
 	li t0,1
 	jal Mem.Alloc
 	nop
@@ -37,6 +42,8 @@ l0:
 	addi a1,4
 	sw a0,0(a1)
 
+	lw ra,0(sp)
+	addi sp,sp,4
 	jr ra
 	nop
 }

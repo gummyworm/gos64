@@ -31,13 +31,13 @@ Start:
 	nop
 
 Loop:
-	WaitScanline($1E0) // Wait For Scanline To Reach Vertical Blank
+	WaitScanline($1e0) // Wait For Scanline To Reach Vertical Blank
 
 	jal Sys.Update
 	nop
-	jal Desk.Draw
+	jal Desk.Update
 	nop
-	jal Sys.Redraw
+	jal Desk.Draw
 	nop
 
 	j Loop

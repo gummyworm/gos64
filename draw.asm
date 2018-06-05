@@ -19,7 +19,7 @@ constant h(t3)
 	mflo t6
 	add t5,t5,t6
 
-	la rowstart,Screen.addr
+	li rowstart,Screen.addr
 	add rowstart,rowstart,t5
 	add rowstop,rowstart,w
 l0:
@@ -32,7 +32,7 @@ l1:
 	addi rowstop,Screen.w*Screen.bpp
 	addi rowstart,Screen.w*Screen.bpp
 	subi h,h,1
-	bne h,r0,l0
+	bnez h,l0
 	nop
 
 	lw ra,0(sp)
@@ -91,6 +91,33 @@ scope Cursor {
 
 	lw ra,0(sp)
 	addi sp,sp,4
+	jr ra
+	nop
+}
+
+// Return the address of the pixel at (a0,a1) in a0.
+ReadPixel:
+scope ReadPixel {
+	sll a0,a0,2
+	li t0,Screen.w*Screen.bpp
+	multu t0,a1
+	mflo t0
+	add t0,t0,a0
+
+	jr ra
+	nop
+}
+
+// Clear the screen to the color in a0
+Clear:
+scope Clear {
+	li a1,Screen.addr
+	li a2,Screen.addr+(Screen.bpp*Screen.w*Screen.h)
+l0:
+	sw a0,0(a1)
+	bne a1,a2,l0
+	addi a1,Screen.bpp
+
 	jr ra
 	nop
 }
